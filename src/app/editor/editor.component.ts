@@ -2,6 +2,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import * as Quill from 'quill';
 import { isNullOrUndefined } from 'util';
+import {Cliente} from '../../models/cliente';
 
 @Component({
   selector: 'app-editor',
@@ -9,11 +10,10 @@ import { isNullOrUndefined } from 'util';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-  client: any;
+  cliente: any;
   crear: boolean;
   buscar: boolean;
   editor;
-  closeResult: string;
 
   constructor(private modalService: NgbModal) {}
 
@@ -26,18 +26,30 @@ export class EditorComponent implements OnInit {
   }
 
   guardar(content) {
-    if (isNullOrUndefined(this.client)) {
-      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
-        .result
-        .then((result) => { this.closeResult = `Closed with: ${result}`; }, () => {});
+    this.crear = false;
+    this.buscar = false;
+    if (isNullOrUndefined(this.cliente)) {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     }
   }
 
   crearCliente() {
     this.crear = !this.crear;
+    this.buscar = false;
   }
 
   buscarCliente() {
     this.buscar = !this.buscar;
+    this.crear = false;
+  }
+
+  clienteEncontrado(cliente: Cliente) {
+    this.cliente = cliente;
+    this.modalService.dismissAll();
+  }
+
+  clienteGuardado(cliente: Cliente) {
+    this.cliente = cliente;
+    this.modalService.dismissAll();
   }
 }
