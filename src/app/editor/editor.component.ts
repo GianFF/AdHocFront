@@ -1,8 +1,7 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit } from '@angular/core';
-import * as Quill from 'quill';
-import { isNullOrUndefined } from 'util';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
 import {Cliente} from '../../models/cliente';
+import * as Quill from 'quill';
 
 @Component({
   selector: 'app-editor',
@@ -10,12 +9,13 @@ import {Cliente} from '../../models/cliente';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-  cliente: any;
+  cliente: Cliente = Cliente.nulo();
   crear: boolean;
   buscar: boolean;
   editor;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal) {
+  }
 
   ngOnInit() {
     this.crear = false;
@@ -28,7 +28,7 @@ export class EditorComponent implements OnInit {
   guardar(content) {
     this.crear = false;
     this.buscar = false;
-    if (isNullOrUndefined(this.cliente)) {
+    if (this.cliente.esNulo()) {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     }
   }

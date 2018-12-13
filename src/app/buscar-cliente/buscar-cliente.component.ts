@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Cliente} from '../../models/cliente';
+import {CLIENTES} from '../../models/clientes-mock';
 
 @Component({
   selector: 'app-buscar-cliente',
@@ -9,14 +10,22 @@ import {Cliente} from '../../models/cliente';
 export class BuscarClienteComponent implements OnInit {
   @Output() cliente = new EventEmitter<Cliente>();
 
+  clientes: Array<Cliente>;
   dataModel: string;
   dropdownOptions: Array<string>;
   config: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.dropdownOptions = ['Juan Carlos', 'Pedor Dario', 'Enrique Gustavo', 'Carlos Manuel', 'Locro Caca', 'Raul Roberto', 'Perez Natalia', 'Veronica Enriquez', 'Estebanez Lloron', 'Pedrito'];
+    // TODO: pedir los clientes a un servicio
+
+    this.clientes = CLIENTES;
+    this.dropdownOptions = this.clientes.map(cliente => {
+      return cliente.nombreCompletoConId();
+    });
+
     this.config = {
       search: true,
       limitTo: 3,
@@ -27,6 +36,8 @@ export class BuscarClienteComponent implements OnInit {
   }
 
   selectionChanged($event: any) {
-    this.cliente.emit($event.value[0]);
+    const nombreDelCliente = $event.value[0];
+    const clienteSeleccionado = this.clientes.find(cliente => cliente.nombreEs(nombreDelCliente));
+    this.cliente.emit(clienteSeleccionado);
   }
 }

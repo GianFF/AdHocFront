@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Cliente} from '../../models/cliente';
 
 @Component({
@@ -6,25 +6,15 @@ import {Cliente} from '../../models/cliente';
   templateUrl: './crear-cliente.component.html',
   styleUrls: ['./crear-cliente.component.css']
 })
-export class CrearClienteComponent implements OnInit {
+export class CrearClienteComponent {
   @Output() cliente = new EventEmitter<Cliente>();
 
-  nombre = '';
-  apellido = '';
-  model = new Cliente('', '');
+  model: Cliente = Cliente.nulo();
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
 
   guardar() {
-    console.log(this.nombre);
-    console.log(this.apellido);
-    console.log(this.model);
-
     this.cliente.emit(this.model);
-
-    this.cliente.emit(new Cliente(this.nombre, this.apellido));
   }
 }
