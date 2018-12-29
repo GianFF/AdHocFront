@@ -21,6 +21,25 @@ export class EditorComponent implements OnInit {
     this.crear = false;
     this.buscar = false;
     this.editor = new Quill('#editor', {
+      modules: {
+        toolbar: [
+          [{ 'font': [] }],
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ 'align': [] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote', 'code-block'],
+
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],
+          [{ 'indent': '-1'}, { 'indent': '+1' }],
+          [{ 'direction': 'rtl' }],
+
+          [{ 'color': [] }, { 'background': [] }],
+
+          ['clean']
+        ]
+      },
       theme: 'snow'
     });
   }
