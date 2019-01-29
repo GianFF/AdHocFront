@@ -18,8 +18,8 @@
     <h4 class="modal-title" id="modal-basic-title">¿Cliente nuevo o existente?</h4>
   </div>
   <div class="modal-body">
-    <button (click)="buscarCliente()" type="button" class="btn btn-info">Buscar cliente</button>
-    <button (click)="crearCliente()" type="button" class="btn btn-success" style="float: right;">Crear cliente</button>
+    <button (click)="abrirBuscarCliente()" type="button" class="btn btn-info">Buscar cliente</button>
+    <button (click)="abrirCrearCliente()" type="button" class="btn btn-success" style="float: right;">Crear cliente</button>
     <br>
     <br>
     <app-buscar-cliente [hidden]="!buscar" (cliente)="clienteEncontrado($event)"></app-buscar-cliente>
