@@ -12,7 +12,7 @@ export class EditorComponent implements OnInit {
   cliente: Cliente = Cliente.nulo();
   crear: boolean;
   buscar: boolean;
-  editor;
+  editor: Quill;
 
   constructor(private modalService: NgbModal) {
   }
@@ -20,8 +20,38 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.crear = false;
     this.buscar = false;
+
+    var toolbarOptions = [
+      [{ 'font': [] }],
+
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'align': [] }],
+
+      ['clean']                                         // remove formatting button
+    ];
+
     this.editor = new Quill('#editor', {
-      theme: 'snow'
+      theme: 'snow',
+      modules: {
+        toolbar: toolbarOptions
+      }
+    });
+
+    this.editor.keyboard.addBinding({ key: 's', ctrlKey: true }, function(range, context) {
+      debugger;
+      this.quill.formatText(range, 'strike', true);
     });
   }
 
@@ -33,12 +63,12 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  crearCliente() {
+  abrirCrearCliente() {
     this.crear = !this.crear;
     this.buscar = false;
   }
 
-  buscarCliente() {
+  abrirBuscarCliente() {
     this.buscar = !this.buscar;
     this.crear = false;
   }
