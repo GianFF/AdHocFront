@@ -3,6 +3,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {Cliente} from '../../models/cliente';
 import * as Quill from 'quill';
 import {EscritoService} from "../../services/escrito.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-editor',
@@ -14,6 +15,7 @@ export class EditorComponent implements OnInit {
   crear: boolean;
   buscar: boolean;
   editor: Quill;
+  private escrito;
 
   constructor(private modalService: NgbModal,
               @Inject('EscritoService') private escritoService: EscritoService) {
@@ -61,6 +63,8 @@ export class EditorComponent implements OnInit {
 
     if (this.cliente.esNulo()) {
       this.modalService.open(contenido, {ariaLabelledBy: 'modal-basic-title'});
+    }else{
+      this.guardarEscrito(this.cliente);
     }
   }
 
@@ -89,9 +93,16 @@ export class EditorComponent implements OnInit {
 
     var contenido = this.editor.getContents();
 
-    this.escritoService.guardar("titulo", contenido, Date.now())
-      .subscribe(data => {
-        console.log(data['contenido']);
-      });
+    if(isNullOrUndefined(this.escrito) || isNullOrUndefined(this.escrito.id)){
+      this.escritoService.guardar("titulo", contenido, this.cliente, Date.now())
+        .subscribe(data => {
+          this.escrito = data;
+        });
+    }else{
+      this.escritoService.editar("titulo", contenido, this.cliente, this.escrito.fechaDeCreacion, this.escrito.id)
+        .subscribe(data => {
+          this.escrito = data;
+        });
+    }
   }
 }

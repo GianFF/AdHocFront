@@ -11,15 +11,30 @@ export class HttpEscritoService implements EscritoService {
 
   constructor(private http: HttpClient) {}
 
-  guardar(titulo: string, contenido: any, fechaDeCreacion: number): Observable<any> {
+  guardar(titulo: string, contenido: any, cliente: any, fechaDeCreacion: number): Observable<any> {
     var url = environment.api + '/escritos';
     var body = {
       titulo: titulo,
       contenido: contenido,
-      fechaDeCreacion: fechaDeCreacion
+      fechaDeCreacion: fechaDeCreacion,
+      cliente: cliente
     };
     var options = {};
 
     return this.http.post(url, body, options);
+  }
+
+  editar(titulo: string, contenido: any, cliente: any, fechaDeCreacion: number, id: number): Observable<any> {
+    var url = environment.api + '/escritos';
+    var body = {
+      titulo: titulo,
+      contenido: contenido,
+      cliente: cliente,
+      fechaDeCreacion: fechaDeCreacion,
+      id: id
+    };
+    var options = {};
+
+    return this.http.put(url, body, options);
   }
 }

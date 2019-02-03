@@ -7,8 +7,12 @@ import {Injectable} from '@angular/core';
 })
 export class MemoriaEscritoService implements EscritoService {
 
-  guardar(titulo: string, contenido: any, fechaDeCreacion: number): Observable<any> {
-    return of({titulo: "string", contenido: "contenido", fechaDeCreacion: "number"});
+  guardar(titulo: string, contenido: any, cliente: any, fechaDeCreacion: number): Observable<any> {
+    return of({titulo: titulo, contenido: contenido, fechaDeCreacion: fechaDeCreacion, cliente: cliente});
+  }
+
+  editar(titulo: string, contenido: any, cliente: any, fechaDeCreacion: number, id: number): Observable<any> {
+    return of({titulo: titulo, contenido: contenido, fechaDeCreacion: fechaDeCreacion, cliente: cliente, id: "number"});
   }
 
 }
