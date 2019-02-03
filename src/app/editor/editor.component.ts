@@ -1,7 +1,8 @@
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {Cliente} from '../../models/cliente';
 import * as Quill from 'quill';
+import {EscritoService} from "../../services/escrito.service";
 
 @Component({
   selector: 'app-editor',
@@ -14,7 +15,8 @@ export class EditorComponent implements OnInit {
   buscar: boolean;
   editor: Quill;
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal,
+              @Inject('EscritoService') private escritoService: EscritoService) {
   }
 
   ngOnInit() {
@@ -50,16 +52,15 @@ export class EditorComponent implements OnInit {
     });
 
     this.editor.keyboard.addBinding({ key: 's', ctrlKey: true }, function(range, context) {
-      debugger;
       this.quill.formatText(range, 'strike', true);
     });
   }
 
-  guardar(content) {
-    this.crear = false;
-    this.buscar = false;
+  guardar(contenido: string) {
+    this.crear = this.buscar = false;
+
     if (this.cliente.esNulo()) {
-      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+      this.modalService.open(contenido, {ariaLabelledBy: 'modal-basic-title'});
     }
   }
 
@@ -74,12 +75,23 @@ export class EditorComponent implements OnInit {
   }
 
   clienteEncontrado(cliente: Cliente) {
-    this.cliente = cliente;
-    this.modalService.dismissAll();
+    this.guardarEscrito(cliente);
   }
 
   clienteGuardado(cliente: Cliente) {
+    this.guardarEscrito(cliente);
+  }
+
+
+  private guardarEscrito(cliente: Cliente) {
     this.cliente = cliente;
     this.modalService.dismissAll();
+
+    var contenido = this.editor.getContents();
+
+    this.escritoService.guardar("titulo", contenido, Date.now())
+      .subscribe(data => {
+        console.log(data['contenido']);
+      });
   }
 }

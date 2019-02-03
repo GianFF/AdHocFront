@@ -11,6 +11,9 @@ import { LandingComponent } from './landing/landing.component';
 import { BuscarClienteComponent } from './buscar-cliente/buscar-cliente.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { FormsModule } from '@angular/forms';
+import {environment} from "../environments/environment.prod";
+import {HttpClientModule} from '@angular/common/http';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -33,9 +36,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     QuillModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: 'EscritoService', useClass: environment.escritoService}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
