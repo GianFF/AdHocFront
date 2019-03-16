@@ -10,10 +10,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { BuscarClienteComponent } from './buscar-cliente/buscar-cliente.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../environments/environment.prod';
 import { HttpClientModule } from '@angular/common/http';
 import { TabsComponent } from './tabs/tabs.component';
 import { ExpedienteComponent } from './expediente/expediente.component';
+import {EscritoService} from '../services/escrito.service';
 
 
 const routes: Routes = [
@@ -42,7 +42,7 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [{provide: 'EscritoService', useClass: environment.escritoService}],
+  providers: [EscritoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

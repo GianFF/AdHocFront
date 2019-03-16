@@ -18,7 +18,7 @@ export class EditorComponent implements OnInit {
   editor: Editor;
   private escrito;
 
-  constructor(@Inject('EscritoService') private escritoService: EscritoService,
+  constructor(private escritoService: EscritoService,
               private modalService: NgbModal) {
   }
 
