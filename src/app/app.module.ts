@@ -5,14 +5,15 @@ import { NgModule } from '@angular/core';
 import { QuillModule } from 'ngx-quill';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { BuscarClienteComponent } from './buscar-cliente/buscar-cliente.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { FormsModule } from '@angular/forms';
-import {environment} from "../environments/environment.prod";
+import {environment} from '../environments/environment.prod';
 import {HttpClientModule} from '@angular/common/http';
+import { TabsComponent } from './tabs/tabs.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     EditorComponent,
     LandingComponent,
     BuscarClienteComponent,
-    CrearClienteComponent
+    CrearClienteComponent,
+    TabsComponent
   ],
   imports: [
     FormsModule,

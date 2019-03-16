@@ -1,0 +1,45 @@
+$color-letras: #000000;
+$color-letras-principal: #dfc075;
+$color-letras-secundario: #fdde7b;
+
+#pestanias{
+  padding-left: 0rem;
+  display: flex;
+  border-bottom: 1px solid #804342;
+
+  .pestania{
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 3rem;
+
+    a {
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      text-decoration: none;
+      color: $color-letras;
+    } :hover {
+        color: $color-letras-secundario;
+        font-weight: bold;
+      }
+  }
+
+  .pestania-activa {
+    border: 3px solid;
+    border-bottom: #ffffff;
+    border-top-color: #a94442;
+    border-right: #804342;
+    border-left: #804342;
+
+    a {
+      color: $color-letras-principal;
+    }
+  }
+}
+
+@media (max-width: 772px) {
+  #pestanias{
+    flex-direction: column;
+  }
+}
