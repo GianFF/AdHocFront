@@ -14,12 +14,16 @@ import { FormsModule } from '@angular/forms';
 import {environment} from '../environments/environment.prod';
 import {HttpClientModule} from '@angular/common/http';
 import { TabsComponent } from './tabs/tabs.component';
+import { ExpedienteComponent } from './expediente/expediente.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'landing', component: LandingComponent },
-  { path: 'editor', component: EditorComponent }
+  { path: 'editor', component: EditorComponent },
+  { path: 'cliente', component: ClienteComponent },
+  { path: 'expediente', component: ExpedienteComponent },
 ];
 
 @NgModule({
@@ -29,7 +33,9 @@ const routes: Routes = [
     LandingComponent,
     BuscarClienteComponent,
     CrearClienteComponent,
-    TabsComponent
+    TabsComponent,
+    ExpedienteComponent,
+    ClienteComponent
   ],
   imports: [
     FormsModule,
