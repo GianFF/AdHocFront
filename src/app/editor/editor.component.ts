@@ -2,8 +2,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Component, OnInit, Inject} from '@angular/core';
 import {Cliente} from '../../models/cliente';
 import * as Quill from 'quill';
-import {EscritoService} from "../../services/escrito.service";
-import {isNullOrUndefined} from "util";
+import {EscritoService} from '../../services/escrito.service';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-editor',
@@ -25,25 +25,25 @@ export class EditorComponent implements OnInit {
     this.crear = false;
     this.buscar = false;
 
-    var toolbarOptions = [
-      [{ 'font': [] }],
+    const toolbarOptions = [
+      [{'font': []}],
 
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['bold', 'italic', 'underline', 'strike'],      // toggled buttons
       ['blockquote', 'code-block'],
 
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text direction
+      [{'header': 1}, {'header': 2}],                 // custom button values
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      [{'script': 'sub'}, {'script': 'super'}],       // superscript/subscript
+      [{'indent': '-1'}, {'indent': '+1'}],           // outdent/indent
+      [{'direction': 'rtl'}],                         // text direction
 
-      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
+      [{'header': [1, 2, 3, 4, 5, 6, false]}],
 
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'align': [] }],
+      [{'color': []}, {'background': []}],            // dropdown with defaults from theme
+      [{'align': []}],
 
-      ['clean']                                         // remove formatting button
+      ['clean']                                       // remove formatting button
     ];
 
     this.editor = new Quill('#editor', {
@@ -63,7 +63,7 @@ export class EditorComponent implements OnInit {
 
     if (this.cliente.esNulo()) {
       this.modalService.open(contenido, {ariaLabelledBy: 'modal-basic-title'});
-    }else{
+    } else {
       this.guardarEscrito(this.cliente);
     }
   }
@@ -91,15 +91,15 @@ export class EditorComponent implements OnInit {
     this.cliente = cliente;
     this.modalService.dismissAll();
 
-    var contenido = this.editor.getContents();
+    const contenido = this.editor.getContents();
 
-    if(isNullOrUndefined(this.escrito) || isNullOrUndefined(this.escrito.id)){
-      this.escritoService.guardar("titulo", contenido, this.cliente, Date.now())
+    if (isNullOrUndefined(this.escrito) || isNullOrUndefined(this.escrito.id)) {
+      this.escritoService.guardar('titulo', contenido, this.cliente, Date.now())
         .subscribe(data => {
           this.escrito = data;
         });
-    }else{
-      this.escritoService.editar("titulo", contenido, this.cliente, this.escrito.fechaDeCreacion, this.escrito.id)
+    } else {
+      this.escritoService.editar('titulo', contenido, this.cliente, this.escrito.fechaDeCreacion, this.escrito.id)
         .subscribe(data => {
           this.escrito = data;
         });
