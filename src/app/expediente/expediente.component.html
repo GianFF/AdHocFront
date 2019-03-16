@@ -1,3 +1,29 @@
-<p>
-  expediente works!
-</p>
+<form (ngSubmit)="guardar()" #expedienteForm="ngForm">
+  <div class="form-group">
+    <label for="nombre">Actor</label>
+    <input [(ngModel)]="model.actor" #nombre="ngModel"
+           type="text" class="form-control" id="nombre" name="nombre" required>
+    <div [hidden]="nombre.valid || nombre.pristine" class="alert alert-danger">
+      Actor es obligatorio
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="demandado">Demandado</label>
+    <input [(ngModel)]="model.demandado" #demandado="ngModel"
+           type="text" class="form-control" id="demandado" name="demandado" required>
+    <div [hidden]="demandado.valid || demandado.pristine" class="alert alert-danger">
+      Demandado es obligatorio
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="materia">Materia</label>
+    <input [(ngModel)]="model.demandado" #materia="ngModel"
+           type="text" class="form-control" id="materia" name="materia" required>
+    <div [hidden]="materia.valid || materia.pristine" class="alert alert-danger">
+      Materia es obligatorio
+    </div>
+  </div>
+  <button [disabled]="!expedienteForm.form.valid" type="submit" class="btn btn-primary" style="float: right">
+    Guardar
+  </button>
+</form>

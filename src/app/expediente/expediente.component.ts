@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Expediente} from '../../models/expediente';
 
 @Component({
   selector: 'app-expediente',
   templateUrl: './expediente.component.html',
   styleUrls: ['./expediente.component.scss']
 })
-export class ExpedienteComponent implements OnInit {
+export class ExpedienteComponent {
+  @Output() expediente = new EventEmitter<Expediente>();
 
-  constructor() { }
+  model: Expediente = Expediente.nulo();
 
-  ngOnInit() {
+  constructor() {
   }
 
+  guardar() {
+    this.expediente.emit(this.model);
+  }
 }
