@@ -47,14 +47,26 @@ export class EditorComponent implements OnInit {
     ];
 
     this.editor = new Quill('#editor', {
-      theme: 'snow',
       modules: {
-        toolbar: toolbarOptions
-      }
-    });
+        toolbar: [
+          [{ 'font': [] }],
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-    this.editor.keyboard.addBinding({ key: 's', ctrlKey: true }, function(range, context) {
-      this.quill.formatText(range, 'strike', true);
+          [{ 'align': [] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote', 'code-block'],
+
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],
+          [{ 'indent': '-1'}, { 'indent': '+1' }],
+          [{ 'direction': 'rtl' }],
+
+          [{ 'color': [] }, { 'background': [] }],
+
+          ['clean']
+        ]
+      },
+      theme: 'snow'
     });
   }
 
