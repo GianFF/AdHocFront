@@ -1,7 +1,9 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit } from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit, Inject} from '@angular/core';
+import {Cliente} from '../../models/cliente';
 import * as Quill from 'quill';
-import { isNullOrUndefined } from 'util';
+import {EscritoService} from "../../services/escrito.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-editor',
@@ -9,35 +11,98 @@ import { isNullOrUndefined } from 'util';
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
-  client: any;
+  cliente: Cliente = Cliente.nulo();
   crear: boolean;
   buscar: boolean;
-  editor;
-  closeResult: string;
+  editor: Quill;
+  private escrito;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,
+              @Inject('EscritoService') private escritoService: EscritoService) {
+  }
 
   ngOnInit() {
     this.crear = false;
     this.buscar = false;
+
+    var toolbarOptions = [
+      [{ 'font': [] }],
+
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'align': [] }],
+
+      ['clean']                                         // remove formatting button
+    ];
+
     this.editor = new Quill('#editor', {
-      theme: 'snow'
+      theme: 'snow',
+      modules: {
+        toolbar: toolbarOptions
+      }
+    });
+
+    this.editor.keyboard.addBinding({ key: 's', ctrlKey: true }, function(range, context) {
+      this.quill.formatText(range, 'strike', true);
     });
   }
 
-  guardar(content) {
-    if (isNullOrUndefined(this.client)) {
-      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
-        .result
-        .then((result) => { this.closeResult = `Closed with: ${result}`; }, () => {});
+  guardar(contenido: string) {
+    this.crear = this.buscar = false;
+
+    if (this.cliente.esNulo()) {
+      this.modalService.open(contenido, {ariaLabelledBy: 'modal-basic-title'});
+    }else{
+      this.guardarEscrito(this.cliente);
     }
   }
 
-  crearCliente() {
+  abrirCrearCliente() {
     this.crear = !this.crear;
+    this.buscar = false;
   }
 
-  buscarCliente() {
+  abrirBuscarCliente() {
     this.buscar = !this.buscar;
+    this.crear = false;
+  }
+
+  clienteEncontrado(cliente: Cliente) {
+    this.guardarEscrito(cliente);
+  }
+
+  clienteGuardado(cliente: Cliente) {
+    this.guardarEscrito(cliente);
+  }
+
+
+  private guardarEscrito(cliente: Cliente) {
+    this.cliente = cliente;
+    this.modalService.dismissAll();
+
+    var contenido = this.editor.getContents();
+
+    if(isNullOrUndefined(this.escrito) || isNullOrUndefined(this.escrito.id)){
+      this.escritoService.guardar("titulo", contenido, this.cliente, Date.now())
+        .subscribe(data => {
+          this.escrito = data;
+        });
+    }else{
+      this.escritoService.editar("titulo", contenido, this.cliente, this.escrito.fechaDeCreacion, this.escrito.id)
+        .subscribe(data => {
+          this.escrito = data;
+        });
+    }
   }
 }
