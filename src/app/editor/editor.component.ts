@@ -4,6 +4,8 @@ import {Cliente} from '../../models/cliente';
 import * as Quill from 'quill';
 import {EscritoService} from '../../services/escrito.service';
 import {isNullOrUndefined} from 'util';
+import {KEYWORDS} from '../../models/keywords';
+import {DATOS_ABOGADA, MATERIA} from '../../models/constantes_abogada';
 
 @Component({
   selector: 'app-editor',
@@ -56,6 +58,16 @@ export class EditorComponent implements OnInit {
     this.editor.keyboard.addBinding({ key: 's', ctrlKey: true }, function(range, context) {
       this.quill.formatText(range, 'strike', true);
     });
+  }
+
+  llenarEsqueleto() {
+    let contenido = this.editor.getText();
+    KEYWORDS.forEach(palabraClave => {
+        const regexp = new RegExp(palabraClave);
+        const dato = DATOS_ABOGADA.find(dato_abogada => dato_abogada.palabraClave === palabraClave).valor;
+        contenido = contenido.replace( regexp, dato);
+    });
+    this.editor.setText(contenido);
   }
 
   guardar(contenido: string) {
