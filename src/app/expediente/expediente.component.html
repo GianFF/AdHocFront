@@ -17,13 +17,13 @@
   </div>
   <div class="form-group">
     <label for="materia">Materia</label>
-    <input [(ngModel)]="model.demandado" #materia="ngModel"
+    <input [(ngModel)]="model.materia" #materia="ngModel"
            type="text" class="form-control" id="materia" name="materia" required>
     <div [hidden]="materia.valid || materia.pristine" class="alert alert-danger">
       Materia es obligatorio
     </div>
   </div>
-  <button [disabled]="!expedienteForm.form.valid" type="submit" class="btn btn-primary" style="float: right">
+  <button [disabled]="!expedienteForm.form.valid" type="submit" class="boton">
     Guardar
   </button>
 </form>

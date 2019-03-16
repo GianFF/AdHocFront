@@ -1,11 +1,9 @@
-$color-letras: #000000;
-$color-letras-principal: #dfc075;
-$color-letras-secundario: #fdde7b;
+@import "../colores.component";
 
 #pestanias{
   padding-left: 0rem;
   display: flex;
-  border-bottom: 1px solid #804342;
+  border-bottom: 1px solid $color-letras-principal;
 
   .pestania{
     display: flex;
