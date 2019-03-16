@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { QuillModule } from 'ngx-quill';
@@ -20,6 +21,7 @@ const routes: Routes = [
     LandingComponent
   ],
   imports: [
+    NgbModule,
     RouterModule.forRoot(routes),
     QuillModule,
     BrowserModule,
