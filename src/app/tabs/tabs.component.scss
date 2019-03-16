@@ -42,4 +42,7 @@ $color-letras-secundario: #fdde7b;
   #pestanias{
     flex-direction: column;
   }
+  .pestania-activa {
+    order: 1;
+  }
 }
