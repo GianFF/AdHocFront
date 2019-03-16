@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Cliente} from '../../models/cliente';
 
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.scss']
+  styleUrls: ['./cliente.component.css']
 })
-export class ClienteComponent implements OnInit {
+export class ClienteComponent {
+  @Output() cliente = new EventEmitter<Cliente>();
 
-  constructor() { }
+  model: Cliente = Cliente.nulo();
 
-  ngOnInit() {
+  constructor() {
   }
 
+  guardar() {
+    this.cliente.emit(this.model);
+  }
 }

@@ -23,7 +23,7 @@
     <br>
     <br>
     <app-buscar-cliente [hidden]="!buscar" (cliente)="clienteEncontrado($event)"></app-buscar-cliente>
-    <app-crear-cliente [hidden]="!crear" (cliente)="clienteGuardado($event)"></app-crear-cliente>
+    <app-cliente [hidden]="!crear" (cliente)="clienteGuardado($event)"></app-cliente>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn" (click)="modal.close()">Cancelar</button>

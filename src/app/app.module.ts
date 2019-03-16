@@ -8,13 +8,12 @@ import { EditorComponent } from './editor/editor.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { BuscarClienteComponent } from './buscar-cliente/buscar-cliente.component';
-import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
+import { ClienteComponent } from './cliente/cliente.component';
 import { FormsModule } from '@angular/forms';
-import {environment} from '../environments/environment.prod';
-import {HttpClientModule} from '@angular/common/http';
+import { environment } from '../environments/environment.prod';
+import { HttpClientModule } from '@angular/common/http';
 import { TabsComponent } from './tabs/tabs.component';
 import { ExpedienteComponent } from './expediente/expediente.component';
-import { ClienteComponent } from './cliente/cliente.component';
 
 
 const routes: Routes = [
@@ -29,10 +28,9 @@ const routes: Routes = [
     AppComponent,
     EditorComponent,
     BuscarClienteComponent,
-    CrearClienteComponent,
     TabsComponent,
     ExpedienteComponent,
-    ClienteComponent
+    ClienteComponent,
   ],
   imports: [
     FormsModule,
