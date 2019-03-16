@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from './landing/landing.component';
 import { BuscarClienteComponent } from './buscar-cliente/buscar-cliente.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { FormsModule } from '@angular/forms';
@@ -19,8 +18,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/landing', pathMatch: 'full' },
-  { path: 'landing', component: LandingComponent },
+  { path: '', redirectTo: '/editor', pathMatch: 'full' },
   { path: 'editor', component: EditorComponent },
   { path: 'cliente', component: ClienteComponent },
   { path: 'expediente', component: ExpedienteComponent },
@@ -30,7 +28,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     EditorComponent,
-    LandingComponent,
     BuscarClienteComponent,
     CrearClienteComponent,
     TabsComponent,
