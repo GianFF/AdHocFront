@@ -15,8 +15,8 @@ export class EscritoService {
     const body = {
       titulo: titulo,
       contenido: contenido,
-      fechaDeCreacion: fechaDeCreacion,
-      cliente: cliente
+      cliente: cliente,
+      fechaDeCreacion: fechaDeCreacion
     };
     const options = {};
 

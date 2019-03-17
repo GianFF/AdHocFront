@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Cliente} from '../../models/cliente';
+import {ClienteService} from '../../services/cliente.service';
 
 @Component({
   selector: 'app-cliente',
@@ -11,10 +12,10 @@ export class ClienteComponent {
 
   model: Cliente = Cliente.nulo();
 
-  constructor() {
+  constructor(private service: ClienteService) {
   }
 
   guardar() {
-    this.cliente.emit(this.model);
+    this.service.guardar(this.model);
   }
 }

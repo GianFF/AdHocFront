@@ -1,8 +1,3 @@
-<b>Cliente: </b> <label>{{cliente.nombre}} {{cliente.apellido}}</label>
-
-<br>
-<br>
-
 <div id="editor" style="height: 200px;">
   <quill-editor [style]="{height: '200px'}"></quill-editor>
 </div>
@@ -10,22 +5,4 @@
 <hr>
 
 <button (click)="llenarEsqueleto()" class="boton"  style="float: left;">Llenar esqueleto</button>
-<button (click)="guardar(content)" class="boton">Guardar</button>
-
-<!-- Modal -->
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">¿Cliente nuevo o existente?</h4>
-  </div>
-  <div class="modal-body">
-    <button (click)="abrirBuscarCliente()" type="button" class="btn btn-info">Buscar cliente</button>
-    <button (click)="abrirCrearCliente()" type="button" class="btn btn-success" style="float: right;">Crear cliente</button>
-    <br>
-    <br>
-    <app-buscar-cliente [hidden]="!buscar" (cliente)="clienteEncontrado($event)"></app-buscar-cliente>
-    <app-cliente [hidden]="!crear" (cliente)="clienteGuardado($event)"></app-cliente>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn" (click)="modal.close()">Cancelar</button>
-  </div>
-</ng-template>
+<button [disabled]="clienteNulo()" (click)="guardar()" class="boton">Guardar</button>

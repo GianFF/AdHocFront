@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Expediente} from '../../models/expediente';
+import {ExpedienteService} from '../../services/expediente.service';
 
 @Component({
   selector: 'app-expediente',
@@ -11,10 +12,10 @@ export class ExpedienteComponent {
 
   model: Expediente = Expediente.nulo();
 
-  constructor() {
+  constructor(private service: ExpedienteService) {
   }
 
   guardar() {
-    this.expediente.emit(this.model);
+    this.service.guardar(this.model);
   }
 }

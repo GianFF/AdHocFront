@@ -1,6 +1,8 @@
 import * as Quill from 'quill';
 import {KEYWORDS} from './keywords';
 import {DATOS_ABOGADA} from './constantes_abogada';
+import {Cliente} from './cliente';
+import {Expediente} from './expediente';
 
 export class Editor {
   editor: Quill;
@@ -11,7 +13,7 @@ export class Editor {
   }
 
 
-  llenarEsqueleto() {
+  llenarEsqueleto(cliente: Cliente, expediente: Expediente) {
     let contenido = this.editor.getText();
     KEYWORDS.forEach(palabraClave => {
       const regexp = new RegExp(palabraClave);
