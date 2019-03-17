@@ -4,16 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { QuillModule } from 'ngx-quill';
 import { AppComponent } from './app.component';
-import { EditorComponent } from './editor/editor.component';
+import { EditorComponent } from './componentes/editor/editor.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
-import { BuscarClienteComponent } from './buscar-cliente/buscar-cliente.component';
-import { ClienteComponent } from './cliente/cliente.component';
+import { BuscarClienteComponent } from './componentes/buscar-cliente/buscar-cliente.component';
+import { ClienteComponent } from './componentes/cliente/cliente.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { TabsComponent } from './tabs/tabs.component';
-import { ExpedienteComponent } from './expediente/expediente.component';
-import {EscritoService} from '../services/escrito.service';
+import { TabsComponent } from './componentes/tabs/tabs.component';
+import { ExpedienteComponent } from './componentes/expediente/expediente.component';
+import {EscritoService} from './services/escrito.service';
 
 
 const routes: Routes = [
