@@ -1,18 +1,23 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Cliente} from '../../models/cliente';
 import {ClienteService} from '../../services/cliente.service';
+import {WorkspaceService} from '../../services/workspace.service';
 
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.scss']
 })
-export class ClienteComponent {
-  @Output() cliente = new EventEmitter<Cliente>();
+export class ClienteComponent implements OnInit {
+  model: Cliente;
 
-  model: Cliente = Cliente.nulo();
+  constructor(private service: ClienteService,
+              private workspaceService: WorkspaceService) {
+  }
 
-  constructor(private service: ClienteService) {
+  ngOnInit(): void {
+    this.model = this.workspaceService.clienteActual() || Cliente.nulo();
+    console.log(this.model);
   }
 
   guardar() {
