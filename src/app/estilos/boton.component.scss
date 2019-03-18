@@ -9,11 +9,15 @@
   min-width: 7rem;
   float: right;
 
-} [disabled] {
+}
+
+.boton [disabled] {
   background-color: $color-letras-principal;
   border-color: $color-letras-principal;
   border: 3px solid $color-letras-principal;
 
-} :hover {
+}
+
+.boton :hover {
    cursor: pointer;
 }
