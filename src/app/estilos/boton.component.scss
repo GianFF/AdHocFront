@@ -1,23 +1,30 @@
 @import '../estilos/colores.component';
 
 .boton {
-  background-color: $color-letras-secundario;
-  border-color: $color-letras-secundario;
-  border: 3px solid $color-letras-secundario;
+  background-color: $color-terciario;
+  border-color: $color-terciario;
+  border: 3px solid $color-terciario;
   border-radius: 0.43rem;
   color: white;
   min-width: 7rem;
   float: right;
-
 }
 
-.boton [disabled] {
-  background-color: $color-letras-principal;
-  border-color: $color-letras-principal;
-  border: 3px solid $color-letras-principal;
+.boton:disabled {
+  background-color: $color-primario;
+  border-color: $color-primario;
+  border: 3px solid $color-primario;
+}
+.boton:disabled:hover {
+   cursor: auto;
+ }
 
+.boton:active {
+  background-color: $color-primario;
+  border-color: $color-primario;
+  border: 3px solid $color-primario;
 }
 
-.boton :hover {
-   cursor: pointer;
-}
+.boton:focus { outline:0; }
+
+.boton:hover { cursor: pointer; }
