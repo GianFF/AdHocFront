@@ -26,6 +26,9 @@ export class EditorComponent implements OnInit {
     this.editor = this.crearQuillEditor();
     this.cliente = this.workspaceService.clienteActual();
     this.expediente = this.workspaceService.expedienteActual();
+    this.escrito = this.workspaceService.escritoActual();
+
+    this.editor.setContenido(this.escrito);
   }
 
   llenarEsqueleto() {
@@ -44,10 +47,6 @@ export class EditorComponent implements OnInit {
           this.escrito = data;
         });
     }
-  }
-
-  clienteNulo() {
-    return !this.cliente || this.cliente.esNulo();
   }
 
   private crearQuillEditor() {

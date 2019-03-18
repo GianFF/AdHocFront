@@ -8,6 +8,7 @@ import {Cliente} from '../models/cliente';
 export class WorkspaceService {
   private cliente: Cliente;
   private expediente: Expediente;
+  private escrito: any;
 
   constructor() { }
 
@@ -19,11 +20,19 @@ export class WorkspaceService {
     return this.expediente;
   }
 
+  escritoActual(): Expediente {
+    return this.escrito;
+  }
+
   setClienteActual(cliente: Cliente) {
     this.cliente = cliente;
   }
 
   setExpedienteActual(expediente: Expediente) {
     this.expediente = expediente;
+  }
+
+  setEscritoActual(escrito: any) {
+    this.escrito = escrito;
   }
 }

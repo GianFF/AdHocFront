@@ -3,7 +3,7 @@
 #pestanias{
   padding-left: 0rem;
   display: flex;
-  border-bottom: 1px solid $color-letras-principal;
+  border-bottom: 1px solid $color-primario;
 
   .pestania{
     display: flex;
@@ -16,9 +16,9 @@
       margin-top: 0.75rem;
       font-size: 0.86rem;
       text-decoration: none;
-      color: $color-letras;
+      color: $color-secundario;
     } :hover {
-        color: $color-letras-secundario;
+        color: $color-terciario;
         font-weight: bold;
       }
   }
@@ -31,7 +31,7 @@
     border-left: #804342;
 
     a {
-      color: $color-letras-principal;
+      color: $color-primario;
     }
   }
 }
